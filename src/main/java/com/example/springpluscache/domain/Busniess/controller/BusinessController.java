@@ -1,11 +1,14 @@
 package com.example.springpluscache.domain.Busniess.controller;
 
-import com.example.springpluscache.domain.Busniess.dto.requestDTO.BusinessSearch;
+import com.example.springpluscache.domain.Busniess.dto.requestDTO.BusinessSearchRequest;
+import com.example.springpluscache.domain.Busniess.dto.responseDTO.BusinessSearchResponse;
 import com.example.springpluscache.domain.Busniess.entity.Business;
-import com.example.springpluscache.domain.Busniess.service.BusinessService;
+import com.example.springpluscache.domain.Busniess.service.BusinessSearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/businesses")
 public class BusinessController {
 
-    private final BusinessService businessService;
+    private final BusinessSearchService businessSearchService;
 
     @GetMapping("/search")
-    public Page<Business> searchV1(BusinessSearch search, Pageable pageable) {
-        return businessService.searchV1(search, pageable);
+    public ResponseEntity<Page<BusinessSearchResponse>> searchV1(BusinessSearchRequest search, Pageable pageable) {
+        Page<BusinessSearchResponse> response = businessSearchService.searchV1(search, pageable);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

@@ -42,8 +42,11 @@ dependencies {
     // ✅ Spring Cache
     implementation 'org.springframework.boot:spring-boot-starter-cache'
 
-//    // ✅ Redis
-//    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    // ✅ Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // ✅ Jackson Java 8 날짜/시간 모듈
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
     // ✅ Database (MySQL)
    runtimeOnly 'com.mysql:mysql-connector-j'

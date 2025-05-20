@@ -1,6 +1,6 @@
 package com.example.springpluscache.domain.Busniess.repository;
 
-import com.example.springpluscache.domain.Busniess.dto.requestDTO.BusinessSearch;
+import com.example.springpluscache.domain.Busniess.dto.requestDTO.BusinessSearchRequest;
 import com.example.springpluscache.domain.Busniess.entity.Business;
 import com.example.springpluscache.domain.Busniess.entity.QBusiness;
 import com.querydsl.core.BooleanBuilder;
@@ -20,7 +20,7 @@ public class BusinessRepositoryImpl implements BusinessRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public Page<Business> search(BusinessSearch search, Pageable pageable) {
+    public Page<Business> search(BusinessSearchRequest search, Pageable pageable) {
         QBusiness b = QBusiness.business;
 
         BooleanBuilder builder = buildSearchConditions(search, b);
@@ -40,7 +40,7 @@ public class BusinessRepositoryImpl implements BusinessRepositoryCustom {
         return PageableExecutionUtils.getPage(results, pageable, countQuery::fetchCount);
     }
 
-    private BooleanBuilder buildSearchConditions(BusinessSearch search, QBusiness b) {
+    private BooleanBuilder buildSearchConditions(BusinessSearchRequest search, QBusiness b) {
         BooleanBuilder builder = new BooleanBuilder();
 
         if (StringUtils.hasText(search.getKeyWords())) {
