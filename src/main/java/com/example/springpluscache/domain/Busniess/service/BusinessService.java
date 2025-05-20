@@ -20,7 +20,7 @@ public class BusinessService {
     }
 
     @Cacheable(value = "businessSearchCache",
-            key = "T(org.springframework.cache.interceptor.SimpleKey).of(#search, #pageable.pageNumber, #pageable.pageSize, #pageable.sort.toString())")
+            key = "T(java.util.Objects).hash(#search, #pageable.pageNumber, #pageable.pageSize, #pageable.sort.toString())")
     public Page<Business> searchV2(BusinessSearch search, Pageable pageable) {
         return businessRepository.search(search, pageable);
     }

@@ -43,14 +43,11 @@ public class BusinessRepositoryImpl implements BusinessRepositoryCustom {
     private BooleanBuilder buildSearchConditions(BusinessSearch search, QBusiness b) {
         BooleanBuilder builder = new BooleanBuilder();
 
-        if (StringUtils.hasText(search.getBusinessName())) {
-            builder.and(b.businessName.containsIgnoreCase(search.getBusinessName()));
-        }
-        if (StringUtils.hasText(search.getIndustryName())) {
-            builder.and(b.industryName.containsIgnoreCase(search.getIndustryName()));
-        }
-        if (StringUtils.hasText(search.getRoadAddress())) {
-            builder.and(b.roadAddress.containsIgnoreCase(search.getRoadAddress()));
+        if (StringUtils.hasText(search.getKeyWords())) {
+            String keyword = search.getKeyWords();
+            builder.or(b.businessName.containsIgnoreCase(keyword));
+            builder.or(b.industryName.containsIgnoreCase(keyword));
+            builder.or(b.roadAddress.containsIgnoreCase(keyword));
         }
 
         return builder;

@@ -8,7 +8,5 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class BusinessSearch {
-    private String businessName;
-    private String industryName;
-    private String roadAddress;
+    private String keyWords;
 }
